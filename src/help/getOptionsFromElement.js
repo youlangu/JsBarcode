@@ -5,20 +5,22 @@ function getOptionsFromElement(element){
 	var options = {};
 	for(var property in defaults){
 		if(defaults.hasOwnProperty(property)){
-			// jsbarcode-*
-			if(element.hasAttribute("jsbarcode-" + property.toLowerCase())){
-				options[property] = element.getAttribute("jsbarcode-" + property.toLowerCase());
-			}
+			if(!element.hasOwnProperty('canvasId')){
+				// jsbarcode-*
+				if(element.hasAttribute("jsbarcode-" + property.toLowerCase())){
+					options[property] = element.getAttribute("jsbarcode-" + property.toLowerCase());
+				}
 
-			// data-*
-			if(element.hasAttribute("data-" + property.toLowerCase())){
-				options[property] = element.getAttribute("data-" + property.toLowerCase());
+				// data-*
+				if(element.hasAttribute("data-" + property.toLowerCase())){
+					options[property] = element.getAttribute("data-" + property.toLowerCase());
+				}
 			}
 		}
 	}
-
-	options["value"] = element.getAttribute("jsbarcode-value") || element.getAttribute("data-value");
-
+	if(!element.hasOwnProperty('canvasId')){
+		options["value"] = element.getAttribute("jsbarcode-value") || element.getAttribute("data-value");
+	}
 // Since all atributes are string they need to be converted to integers
 	options = optionsFromStrings(options);
 

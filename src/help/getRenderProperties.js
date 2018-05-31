@@ -54,6 +54,14 @@ function getRenderProperties(element){
 			renderer: renderers.CanvasRenderer
 		};
 	}
+	// If wechat mini program
+	else if(element && element.canvasId !== 'undefined'){
+		return {
+			element: element,
+			options: getOptionsFromElement(element),
+			renderer: renderers.wxCanvasRenderer
+		};						
+	}					
 	// If canvas (in node)
 	else if(element && element.getContext){
 		return {

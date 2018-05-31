@@ -64,20 +64,28 @@ function getRenderProperties(element) {
 							renderer: _renderers2.default.CanvasRenderer
 						};
 					}
-					// If canvas (in node)
-					else if (element && element.getContext) {
+					// If wechat mini program
+					else if (element && element.canvasId !== 'undefined') {
 							return {
 								element: element,
-								renderer: _renderers2.default.CanvasRenderer
+								options: (0, _getOptionsFromElement2.default)(element),
+								renderer: _renderers2.default.wxCanvasRenderer
 							};
-						} else if (element && (typeof element === "undefined" ? "undefined" : _typeof(element)) === 'object' && !element.nodeName) {
-							return {
-								element: element,
-								renderer: _renderers2.default.ObjectRenderer
-							};
-						} else {
-							throw new _exceptions.InvalidElementException();
 						}
+						// If canvas (in node)
+						else if (element && element.getContext) {
+								return {
+									element: element,
+									renderer: _renderers2.default.CanvasRenderer
+								};
+							} else if (element && (typeof element === "undefined" ? "undefined" : _typeof(element)) === 'object' && !element.nodeName) {
+								return {
+									element: element,
+									renderer: _renderers2.default.ObjectRenderer
+								};
+							} else {
+								throw new _exceptions.InvalidElementException();
+							}
 }
 
 function querySelectedRenderProperties(string) {

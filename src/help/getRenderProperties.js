@@ -59,7 +59,7 @@ function getRenderProperties(element){
 		return {
 			element: element,
 			options: getOptionsFromElement(element),
-			renderer: renderers.wxCanvasRenderer
+			renderer: renderers.WxCanvasRenderer
 		};						
 	}					
 	// If canvas (in node)

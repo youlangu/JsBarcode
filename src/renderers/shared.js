@@ -77,7 +77,8 @@ function messureText(string, options, context){
 		// This will make some barcode with big text render incorrectly
 		return 0;
 	}
-	ctx.font = options.fontOptions + " " + options.fontSize + "px " + options.font;
+	var font = options.fontOptions + " " + options.fontSize + "px " + options.font;
+	ctx.font = font.trim();
 
 	// Calculate the width of the encoding
 	var size = ctx.measureText(string).width;

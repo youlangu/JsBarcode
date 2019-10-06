@@ -44,48 +44,48 @@ function getRenderProperties(element) {
 			}
 			return returnArray;
 		}
-		// If element, render on canvas and set the uri as src
-		else if (typeof HTMLCanvasElement !== 'undefined' && element instanceof HTMLImageElement) {
-				return newCanvasRenderProperties(element);
-			}
-			// If SVG
-			else if (element && element.nodeName === 'svg' || typeof SVGElement !== 'undefined' && element instanceof SVGElement) {
-					return {
-						element: element,
-						options: (0, _getOptionsFromElement2.default)(element),
-						renderer: _renderers2.default.SVGRenderer
-					};
-				}
-				// If canvas (in browser)
-				else if (typeof HTMLCanvasElement !== 'undefined' && element instanceof HTMLCanvasElement) {
-						return {
-							element: element,
-							options: (0, _getOptionsFromElement2.default)(element),
-							renderer: _renderers2.default.CanvasRenderer
-						};
-					}
-					// If wechat mini program
-					else if (element && element.canvasId !== 'undefined') {
-							return {
-								element: element,
-								options: (0, _getOptionsFromElement2.default)(element),
-								renderer: _renderers2.default.wxCanvasRenderer
-							};
-						}
-						// If canvas (in node)
-						else if (element && element.getContext) {
-								return {
-									element: element,
-									renderer: _renderers2.default.CanvasRenderer
-								};
-							} else if (element && (typeof element === "undefined" ? "undefined" : _typeof(element)) === 'object' && !element.nodeName) {
-								return {
-									element: element,
-									renderer: _renderers2.default.ObjectRenderer
-								};
-							} else {
-								throw new _exceptions.InvalidElementException();
-							}
+	// If wechat mini program
+	else if (element && element.canvasId !== 'undefined') {
+			return {
+				element: element,
+				options: (0, _getOptionsFromElement2.default)(element),
+				renderer: _renderers2.default.wxCanvasRenderer
+			};
+		}	
+	// If element, render on canvas and set the uri as src
+	else if (typeof HTMLCanvasElement !== 'undefined' && element instanceof HTMLImageElement) {
+			return newCanvasRenderProperties(element);
+		}
+	// If SVG
+	else if (element && element.nodeName === 'svg' || typeof SVGElement !== 'undefined' && element instanceof SVGElement) {
+			return {
+				element: element,
+				options: (0, _getOptionsFromElement2.default)(element),
+				renderer: _renderers2.default.SVGRenderer
+			};
+		}
+	// If canvas (in browser)
+	else if (typeof HTMLCanvasElement !== 'undefined' && element instanceof HTMLCanvasElement) {
+			return {
+				element: element,
+				options: (0, _getOptionsFromElement2.default)(element),
+				renderer: _renderers2.default.CanvasRenderer
+			};
+		}
+	// If canvas (in node)
+	else if (element && element.getContext) {
+			return {
+				element: element,
+				renderer: _renderers2.default.CanvasRenderer
+			};
+	} else if (element && (typeof element === "undefined" ? "undefined" : _typeof(element)) === 'object' && !element.nodeName) {
+		return {
+			element: element,
+			renderer: _renderers2.default.ObjectRenderer
+		};
+	} else {
+		throw new _exceptions.InvalidElementException();
+	}
 }
 
 function querySelectedRenderProperties(string) {

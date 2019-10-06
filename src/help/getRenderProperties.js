@@ -31,6 +31,14 @@ function getRenderProperties(element){
 		}
 		return returnArray;
 	}
+	// If wechat mini program
+	else if(element && element.canvasId !== 'undefined'){
+		return {
+			element: element,
+			options: getOptionsFromElement(element),
+			renderer: renderers.WxCanvasRenderer
+		};						
+	}	
 	// If element, render on canvas and set the uri as src
 	else if(typeof HTMLCanvasElement !== 'undefined' && element instanceof HTMLImageElement){
 		return newCanvasRenderProperties(element);
@@ -53,14 +61,6 @@ function getRenderProperties(element){
 			options: getOptionsFromElement(element),
 			renderer: renderers.CanvasRenderer
 		};
-	}
-	// If wechat mini program
-	else if(element && element.canvasId !== 'undefined'){
-		return {
-			element: element,
-			options: getOptionsFromElement(element),
-			renderer: renderers.WxCanvasRenderer
-		};						
 	}					
 	// If canvas (in node)
 	else if(element && element.getContext){
